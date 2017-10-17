@@ -15,5 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get( 'veterinarias', 'MongoConexionController@index' );
-Route::get( 'categoria', 'CategoriaController@index' );
+Route::group( [ 'prefix' => 'api/mobile/v1' ], function(){
+	// veterinarias
+	Route::get( 'veterinaria', 'VeterinariaController@index' );
+	Route::get( 'services/{id}', 'VeterinariaController@show' );
+
+	// Categorias
+	Route::get( 'services', 'CategoriaController@index' );
+
+	// Carriers
+	Route::get( 'carrier/{id}', 'CarrierController@show' );
+
+});
+
+Route::group( [ 'prefix' => 'api/cms/v1' ], function(){
+	// veterinarias
+	Route::get( 'veterinaria', 'VeterinariaController@index' );
+	Route::get( 'veterinaria/{id}', 'VeterinariaController@show' );
+
+	// Categorias
+	Route::get( 'categoria', 'CategoriaController@index' );
+
+});
